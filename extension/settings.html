@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Enhanced Shinigami Eyes Settings</title>
+  <style>
+    :root {
+      --primary-color: #6c5ce7;
+      --accent-color: #a29bfe;
+      --text-color: #333;
+      --bg-color: #fff;
+      --card-bg: #f8f9fa;
+      --border-color: #ddd;
+      --success-color: #0C8;
+      --warning-color: #F80;
+      --danger-color: #F30;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --text-color: #f1f1f1;
+        --bg-color: #222;
+        --card-bg: #333;
+        --border-color: #444;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    h1, h2, h3 {
+      color: var(--primary-color);
+      margin-top: 0;
+    }
+
+    .card {
+      background-color: var(--card-bg);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 15px;
+      margin-top: 15px;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+
+    input[type="text"],
+    input[type="url"],
+    select {
+      width: 100%;
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      font-size: 14px;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+    }
+
+    input[type="checkbox"] {
+      margin-right: 8px;
+    }
+
+    button {
+      background-color: var(--primary-color);
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background-color 0.2s;
+    }
+
+    button:hover {
+      background-color: var(--accent-color);
+    }
+
+    .status {
+      margin-top: 20px;
+      padding: 10px;
+      border-radius: 4px;
+      display: none;
+    }
+
+    .status.success {
+      background-color: rgba(0, 204, 136, 0.2);
+      color: var(--success-color);
+      display: block;
+    }
+
+    .status.error {
+      background-color: rgba(255, 51, 0, 0.2);
+      color: var(--danger-color);
+      display: block;
+    }
+
+    .color-preview {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      display: inline-block;
+      margin-left: 10px;
+      border: 1px solid var(--border-color);
+    }
+
+    .backend-info {
+      margin-top: 10px;
+      font-size: 14px;
+      font-style: italic;
+    }
+
+    .help-text {
+      font-size: 12px;
+      color: #666;
+      margin-top: 4px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      .help-text {
+        color: #aaa;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Enhanced Shinigami Eyes Settings</h1>
+    
+    <div class="card">
+      <h2>Backend Configuration</h2>
+      <p>Choose how you want to use Enhanced Shinigami Eyes.</p>
+      
+      <div class="form-group">
+        <label for="backend-mode">Mode:</label>
+        <select id="backend-mode">
+          <option value="legacy">Legacy Mode (Original Functionality)</option>
+          <option value="local">Enhanced - Local Backend</option>
+          <option value="hosted">Enhanced - Hosted Backend</option>
+        </select>
+        <p class="help-text">Legacy mode uses the original Shinigami Eyes functionality without ML enhancements.</p>
+      </div>
+      
+      <div id="local-backend-settings" class="form-group" style="display: none;">
+        <label for="local-url">Local Backend URL:</label>
+        <input type="url" id="local-url" placeholder="http://localhost:5000">
+        <p class="help-text">URL to your local ML service. You need to run the service on your machine.</p>
+        <p class="backend-info">⚠️ Local backend requires setup. See the <a href="https://github.com/your-username/shinigami-eyes/blob/main/guide/setup.md" target="_blank">setup guide</a>.</p>
+      </div>
+      
+      <div id="hosted-backend-settings" class="form-group" style="display: none;">
+        <p class="backend-info">✅ Using the hosted backend service. No additional setup required.</p>
+        <p class="backend-info">This service is provided free of charge, but please consider <a href="#" id="donate-link">donating</a> to support server costs.</p>
+      </div>
+    </div>
+    
+    <div id="enhancement-settings" class="card" style="display: none;">
+      <h2>Enhancement Features</h2>
+      <p>Select which enhanced features you want to enable:</p>
+      
+      <div class="feature-grid">
+        <div class="feature-item">
+          <input type="checkbox" id="content-analysis" checked>
+          <label for="content-analysis">Content Analysis</label>
+        </div>
+        
+        <div class="feature-item">
+          <input type="checkbox" id="profile-analysis" checked>
+          <label for="profile-analysis">Profile Analysis</label>
+        </div>
+        
+        <div class="feature-item">
+          <input type="checkbox" id="website-analysis" checked>
+          <label for="website-analysis">Website Analysis</label>
+        </div>
+        
+        <div class="feature-item">
+          <input type="checkbox" id="gray-area" checked>
+          <label for="gray-area">Gray Area Labeling</label>
+        </div>
+        
+        <div class="feature-item">
+          <input type="checkbox" id="confidence-display" checked>
+          <label for="confidence-display">Show Confidence</label>
+        </div>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>Privacy Settings</h2>
+      
+      <div class="form-group">
+        <div class="feature-item">
+          <input type="checkbox" id="anonymous-stats">
+          <label for="anonymous-stats">Send Anonymous Usage Statistics</label>
+        </div>
+        <p class="help-text">Help improve the extension by sending anonymous usage data. No personal information is collected.</p>
+      </div>
+    </div>
+    
+    <div class="card">
+      <h2>Color Settings</h2>
+      
+      <div class="form-group">
+        <label>Trans-friendly Color:</label>
+        <div class="flex">
+          <input type="text" id="trans-friendly-color" value="#0C8">
+          <div class="color-preview" id="trans-friendly-preview" style="background-color: #0C8;"></div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Transphobic Color:</label>
+        <div class="flex">
+          <input type="text" id="transphobic-color" value="#F30">
+          <div class="color-preview" id="transphobic-preview" style="background-color: #F30;"></div>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label>Gray Area Color:</label>
+        <div class="flex">
+          <input type="text" id="gray-area-color" value="#F80">
+          <div class="color-preview" id="gray-area-preview" style="background-color: #F80;"></div>
+        </div>
+      </div>
+    </div>
+    
+    <button id="save-settings">Save Settings</button>
+    
+    <div id="status" class="status"></div>
+  </div>
+
+  <script src="config.js"></script>
+  <script src="donation.js"></script>
+  <script>
+    // Dom elements
+    const backendMode = document.getElementById('backend-mode');
+    const localBackendSettings = document.getElementById('local-backend-settings');
+    const hostedBackendSettings = document.getElementById('hosted-backend-settings');
+    const enhancementSettings = document.getElementById('enhancement-settings');
+    const localUrl = document.getElementById('local-url');
+    const donateLink = document.getElementById('donate-link');
+    
+    // Feature checkboxes
+    const contentAnalysis = document.getElementById('content-analysis');
+    const profileAnalysis = document.getElementById('profile-analysis');
+    const websiteAnalysis = document.getElementById('website-analysis');
+    const grayArea = document.getElementById('gray-area');
+    const confidenceDisplay = document.getElementById('confidence-display');
+    
+    // Privacy settings
+    const anonymousStats = document.getElementById('anonymous-stats');
+    
+    // Color settings
+    const transFriendlyColor = document.getElementById('trans-friendly-color');
+    const transphobicColor = document.getElementById('transphobic-color');
+    const grayAreaColor = document.getElementById('gray-area-color');
+    
+    // Color previews
+    const transFriendlyPreview = document.getElementById('trans-friendly-preview');
+    const transphobicPreview = document.getElementById('transphobic-preview');
+    const grayAreaPreview = document.getElementById('gray-area-preview');
+    
+    // Save button and status
+    const saveButton = document.getElementById('save-settings');
+    const statusElement = document.getElementById('status');
+    
+    // Load configuration from storage
+    function loadConfig() {
+      // This function will be implemented in the included config.js
+      const config = window.configManager.getConfig();
+      
+      // Set backend mode
+      backendMode.value = config.backendMode;
+      localUrl.value = config.localBackendUrl;
+      
+      // Set enhancement features
+      contentAnalysis.checked = config.enhancementFeatures.contentAnalysis;
+      profileAnalysis.checked = config.enhancementFeatures.profileAnalysis;
+      websiteAnalysis.checked = config.enhancementFeatures.websiteAnalysis;
+      grayArea.checked = config.enhancementFeatures.grayAreaLabeling;
+      confidenceDisplay.checked = config.enhancementFeatures.confidenceDisplay;
+      
+      // Set privacy settings
+      anonymousStats.checked = config.sendAnonymousStats;
+      
+      // Set color settings
+      const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const colorConfig = isDarkMode ? config.darkThemeColors : config.lightThemeColors;
+      
+      transFriendlyColor.value = colorConfig.transFriendly;
+      transphobicColor.value = colorConfig.transphobic;
+      grayAreaColor.value = colorConfig.grayArea;
+      
+      transFriendlyPreview.style.backgroundColor = colorConfig.transFriendly;
+      transphobicPreview.style.backgroundColor = colorConfig.transphobic;
+      grayAreaPreview.style.backgroundColor = colorConfig.grayArea;
+      
+      // Update UI based on backend mode
+      updateBackendUI();
+    }
+    
+    // Update UI based on backend mode
+    function updateBackendUI() {
+      const mode = backendMode.value;
+      
+      if (mode === 'local') {
+        localBackendSettings.style.display = 'block';
+        hostedBackendSettings.style.display = 'none';
+        enhancementSettings.style.display = 'block';
+      } else if (mode === 'hosted') {
+        localBackendSettings.style.display = 'none';
+        hostedBackendSettings.style.display = 'block';
+        enhancementSettings.style.display = 'block';
+      } else {
+        // Legacy mode
+        localBackendSettings.style.display = 'none';
+        hostedBackendSettings.style.display = 'none';
+        enhancementSettings.style.display = 'none';
+      }
+    }
+    
+    // Save configuration to storage
+    function saveConfig() {
+      const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      
+      const config = {
+        backendMode: backendMode.value,
+        localBackendUrl: localUrl.value,
+        
+        enhancementFeatures: {
+          contentAnalysis: contentAnalysis.checked,
+          profileAnalysis: profileAnalysis.checked,
+          websiteAnalysis: websiteAnalysis.checked,
+          grayAreaLabeling: grayArea.checked,
+          confidenceDisplay: confidenceDisplay.checked
+        },
+        
+        sendAnonymousStats: anonymousStats.checked
+      };
+      
+      // Update colors for current theme only
+      if (isDarkMode) {
+        config.darkThemeColors = {
+          transFriendly: transFriendlyColor.value,
+          transphobic: transphobicColor.value,
+          grayArea: grayAreaColor.value
+        };
+      } else {
+        config.lightThemeColors = {
+          transFriendly: transFriendlyColor.value,
+          transphobic: transphobicColor.value,
+          grayArea: grayAreaColor.value
+        };
+      }
+      
+      // Save configuration using config manager
+      window.configManager.updateConfig(config);
+      
+      // Show success message
+      statusElement.textContent = 'Settings saved successfully!';
+      statusElement.className = 'status success';
+      
+      // Hide message after 3 seconds
+      setTimeout(() => {
+        statusElement.style.display = 'none';
+      }, 3000);
+    }
+    
+    // Event listeners
+    window.addEventListener('DOMContentLoaded', loadConfig);
+    
+    backendMode.addEventListener('change', updateBackendUI);
+    
+    saveButton.addEventListener('click', saveConfig);
+    
+    // Color preview updates
+    transFriendlyColor.addEventListener('input', () => {
+      transFriendlyPreview.style.backgroundColor = transFriendlyColor.value;
+    });
+    
+    transphobicColor.addEventListener('input', () => {
+      transphobicPreview.style.backgroundColor = transphobicColor.value;
+    });
+    
+    grayAreaColor.addEventListener('input', () => {
+      grayAreaPreview.style.backgroundColor = grayAreaColor.value;
+    });
+    
+    // Donation link
+    donateLink.addEventListener('click', (e) => {
+      e.preventDefault();
+      const donationManager = new window.DonationManager();
+      donationManager.showDonationPrompt();
+    });
+  </script>
+</body>
+</html>
